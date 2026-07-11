@@ -4,8 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - campaign-source.tgz.b64
-      - .github/workflows/bootstrap-campaign.yml
+      - campaign-source.ready
   workflow_dispatch:
 
 permissions:
@@ -18,25 +17,28 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Confirm payload exists
+      - name: Confirm complete payload exists
         id: payload
         shell: bash
         run: |
-          if [[ -f campaign-source.tgz.b64 ]]; then
+          shopt -s nullglob
+          parts=(campaign-source.part-*)
+          if [[ -f campaign-source.ready && ${#parts[@]} -gt 0 ]]; then
             echo "present=true" >> "$GITHUB_OUTPUT"
           else
             echo "present=false" >> "$GITHUB_OUTPUT"
-            echo "Bootstrap workflow installed; waiting for campaign payload."
+            echo "Campaign payload is incomplete."
           fi
 
       - name: Expand audited campaign source
         if: steps.payload.outputs.present == 'true'
         shell: bash
         run: |
-          base64 --decode campaign-source.tgz.b64 > /tmp/pmi-source.tgz
+          cat campaign-source.part-* > /tmp/pmi-source.tgz.b64
+          base64 --decode /tmp/pmi-source.tgz.b64 > /tmp/pmi-source.tgz
           test "$(sha256sum /tmp/pmi-source.tgz | awk '{print $1}')" = "147a028fec35fad7e267cf39f1cdcd4d3e2c095cba52ce66b0d2418c3b011224"
           tar -xzf /tmp/pmi-source.tgz
-          rm -f campaign-source.tgz.b64 .github/workflows/bootstrap-campaign.yml
+          rm -f campaign-source.ready campaign-source.part-* .github/workflows/bootstrap-campaign.yml
 
       - name: Install PDF renderer
         if: steps.payload.outputs.present == 'true'
