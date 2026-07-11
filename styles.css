@@ -1,0 +1,4 @@
+@import url("styles-document.css");
+@import url("styles-campaign.css");
+@import url("styles-artifact.css");
+@media print{.doc-nav{display:none!important}}
