@@ -2,14 +2,13 @@
   "campaign": "PMI – Business Process Excellence",
   "repository": "russelldudek/PhilipMorris",
   "branch": "main",
-  "state_before_main_verification": "building",
   "files": [
     {"path": ".github/workflows/render-pdfs.yml", "bytes": 1511, "sha256": "3ae72773f40eaa5a25b705028b40b901258180d6c3c4672790f6d85afbfd8a21"},
     {"path": ".nojekyll", "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
     {"path": "120-day-plan.html", "bytes": 4733, "sha256": "52801dddd3af490f54c9723322e8760316852fb3699ef1380418c54851513da2"},
     {"path": "ALIGNMENT-AUDIT.md", "bytes": 3936, "sha256": "2428987d4807107f202f1f18daa6bf6be540e34d6e30fa9ae811941e1d153794"},
     {"path": "BRAND-INTELLIGENCE.md", "bytes": 2847, "sha256": "f42043ff1f9657ebaec52300698b7a3d526230c3005f4c4fa9be2c4511e360d1"},
-    {"path": "CAMPAIGN-COMPLETION-AUDIT.md", "bytes": 2163, "sha256": "0df64330781f884d77145246aa9c5d6039aee80666deaa64ed35bbcbcb91def1"},
+    {"path": "CAMPAIGN-COMPLETION-AUDIT.md", "bytes": 4249, "sha256": "dce6dfeb66e1ae5c93483883cd04483b48d503817c424a391a4016682814620c"},
     {"path": "README.md", "bytes": 3019, "sha256": "191366f8aa9970eaa8a17e3e43d739b3757f249e78453daf60ccf4978e2e3caa"},
     {"path": "app.js", "bytes": 6742, "sha256": "e80d7906141677b640cba69944133a4959286a2e8d51cb34dd2b9472eda67eb4"},
     {"path": "assets/README.md", "bytes": 110, "sha256": "99ce83821a732e9cd3c012e429c7008334874a049f62e06fab62747ef7ea21e0"},
@@ -39,5 +38,6 @@
   "page_counts": {"PMI-120-Day-Entry-Plan.pdf": 1, "PMI-Hard-Objection-Analysis.pdf": 1, "PMI-Interview-Thesis-Brief.pdf": 2, "Russell-Dudek-PMI-Cover-Letter.pdf": 1, "Russell-Dudek-PMI-Resume.pdf": 2},
   "local_internal_link_issues": [],
   "rendered_viewports": ["1440x900", "1280x800", "768x1024", "390x844", "1280x800 reduced-motion"],
-  "browser_plugin": "absent; Playwright fallback used"
+  "browser_plugin": "absent; Playwright fallback used",
+  "state": "building"
 }
