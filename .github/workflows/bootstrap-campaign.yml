@@ -1,0 +1,84 @@
+name: Bootstrap aligned PMI campaign
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - campaign-source.tgz.b64
+      - .github/workflows/bootstrap-campaign.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Confirm payload exists
+        id: payload
+        shell: bash
+        run: |
+          if [[ -f campaign-source.tgz.b64 ]]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "Bootstrap workflow installed; waiting for campaign payload."
+          fi
+
+      - name: Expand audited campaign source
+        if: steps.payload.outputs.present == 'true'
+        shell: bash
+        run: |
+          base64 --decode campaign-source.tgz.b64 > /tmp/pmi-source.tgz
+          test "$(sha256sum /tmp/pmi-source.tgz | awk '{print $1}')" = "147a028fec35fad7e267cf39f1cdcd4d3e2c095cba52ce66b0d2418c3b011224"
+          tar -xzf /tmp/pmi-source.tgz
+          rm -f campaign-source.tgz.b64 .github/workflows/bootstrap-campaign.yml
+
+      - name: Install PDF renderer
+        if: steps.payload.outputs.present == 'true'
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install beautifulsoup4 playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Generate final PDFs
+        if: steps.payload.outputs.present == 'true'
+        run: python scripts/render_pdfs.py
+
+      - name: Verify campaign contract
+        if: steps.payload.outputs.present == 'true'
+        shell: bash
+        run: |
+          test -f index.html
+          test -f resume.html
+          test -f cover-letter.html
+          test -f interview-brief.html
+          test -f entry-plan.html
+          test -f hard-objection.html
+          test -f docs/Russell-Dudek-PMI-Resume.pdf
+          test -f docs/Russell-Dudek-PMI-Cover-Letter.pdf
+          test -f docs/PMI-Interview-Thesis-Brief.pdf
+          test -f docs/PMI-120-Day-Entry-Plan.pdf
+          test -f docs/PMI-Hard-Objection-Analysis.pdf
+          grep -q 'View Cover Letter' resume.html
+          grep -q 'View Resume' cover-letter.html
+          grep -q 'Download PDF' resume.html
+          grep -q 'Download PDF' cover-letter.html
+
+      - name: Commit aligned campaign
+        if: steps.payload.outputs.present == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No campaign changes to commit."
+          else
+            git commit -m "Publish aligned PMI RoleForge campaign"
+            git push
+          fi
