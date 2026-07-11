@@ -1,0 +1,50 @@
+name: Render campaign PDFs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/render_pdfs.py"
+      - ".github/workflows/render-pdfs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install reportlab pypdf
+      - run: python scripts/render_pdfs.py
+      - name: Verify page counts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          expected = {
+            'Russell-Dudek-PMI-Resume.pdf': 2,
+            'Russell-Dudek-PMI-Cover-Letter.pdf': 1,
+            'PMI-Interview-Thesis-Brief.pdf': 2,
+            'PMI-120-Day-Entry-Plan.pdf': 1,
+            'PMI-Hard-Objection-Analysis.pdf': 1,
+          }
+          for name, pages in expected.items():
+              actual = len(PdfReader(str(Path('docs') / name)).pages)
+              assert actual == pages, f'{name}: expected {pages}, got {actual}'
+          PY
+      - name: Commit generated PDFs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/*.pdf
+          if git diff --cached --quiet; then
+            echo "PDFs are current."
+          else
+            git commit -m "Regenerate campaign PDFs [skip ci]"
+            git push
+          fi
