@@ -1,8 +1,8 @@
 name: Bootstrap aligned PMI campaign
 
 on:
-  issues:
-    types: [opened]
+  schedule:
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -10,7 +10,6 @@ permissions:
 
 jobs:
   publish:
-    if: github.event_name == 'workflow_dispatch' || github.event.issue.title == 'Publish aligned PMI campaign'
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
