@@ -4,37 +4,31 @@
 
 **Campaign state: building**
 
-The brand-fidelity repair passes source, rendered, responsive, accessibility, reduced-motion, document, and PDF checks. Completion still requires the repaired artifact set to be verified from final `main` and the live GitHub Pages index, reciprocal résumé/cover-letter routes, interaction, and PDF downloads to be independently tested.
+The complete brand-fidelity repair is committed to `main` and the regenerated PDF artifact head is `871bbeb977725c5755655246f250c938f378e223`. The only unresolved completion gate is live GitHub Pages verification.
 
 ## Passed gates
 
 - Repository identity and canonical `main`: passed
-- Main-branch artifact structure before brand repair: passed
+- Complete campaign and brand package on `main`: passed
+- Official PMI wordmark above the fold: passed
+- Independent-candidate distinction: passed
+- Source-sampled color provenance: passed
+- Evidence-based Lato typography decision: passed
+- Brand continuity across site and document HTML: passed
+- PDF brand continuity: passed
 - Factual and evidence integrity: passed
 - Narrative continuity: passed
-- Brand Fidelity Contract: passed locally
-- Visible official PMI identity above the fold: passed locally
-- Source-derived color and typography provenance: passed
-- Committed `assets/brand/` package: prepared
-- Process Genome individuality and anti-clone review: passed
-- Visual Experience Contract: passed locally
-- Role-Derived Motion Contract: passed locally
-- Pointer and keyboard state transitions: passed
-- Desktop, laptop, tablet, and mobile render review: passed
-- Reduced-motion render review: passed
-- Resume and cover-letter reciprocal source links: passed
+- Process Genome individuality / anti-clone review: passed
+- Visual Experience Contract: passed in rendered QA
+- Role-Derived Motion Contract: passed in rendered QA
+- Desktop, laptop, tablet, mobile, and reduced-motion review: passed
+- Accessible DOM wordmark, focus, keyboard controls, and mobile navigation: passed
 - PDF page counts: passed at **2 / 1 / 2 / 1 / 1**
-- PDF visual brand continuity: passed
-- Resume page-one balance: passed
+- Resume page-one balance and professional PDF pagination: passed
+- Final canonical RoleForge refresh: passed
 
 ## Remaining gate
 
-- repaired branch fast-forward to `main`
-- exact final `main` head capture
-- explicit re-fetch of every brand asset, source file, and PDF from final `main`
-- live GitHub Pages verification
-- live résumé → cover letter and cover letter → résumé navigation
-- live PDF downloads and interactive state verification
-- final canonical RoleForge refresh after publication
+The expected Pages URL, live résumé → cover-letter and cover-letter → résumé navigation, interactive motion, and live PDF downloads could not be resolved or discovered. The connected GitHub capability does not expose Pages administration.
 
-Do not classify this campaign as complete until those remaining checks pass.
+Until those routes are enabled and verified, do not classify the campaign as complete.

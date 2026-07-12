@@ -34,10 +34,14 @@
   },
   "rendered_viewports": ["1440x900", "1280x800", "768x1024", "390x844", "1280x800 reduced-motion"],
   "browser_plugin": "absent; Playwright Chromium fallback used",
-  "brand_fidelity": "passed locally; final main and live deployment verification pending",
+  "brand_fidelity": "passed in source, rendered, document, and PDF audit",
   "state": "building",
-  "canonical_brand_contract": {
+  "audited_artifact_head": "871bbeb977725c5755655246f250c938f378e223",
+  "canonical_refresh": {
     "skill_sha": "8c8a581daec228cc36bee4c94642193064bcbba3",
-    "brand_fidelity_sha": "f3c77eff7b9ddca81f2c47cee2a7927228fc5c61"
-  }
+    "brand_fidelity_sha": "f3c77eff7b9ddca81f2c47cee2a7927228fc5c61",
+    "portfolio_index_sha": "5d4131607b19444cba44c06f6c85448924496144",
+    "anti_clone_ledger_sha": "355a14fb4609d81d060e166101cbcc6150e50481"
+  },
+  "remaining_gate": "GitHub Pages and live route verification"
 }

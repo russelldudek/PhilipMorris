@@ -5,57 +5,46 @@ Suggested chat name: **PMI – Business Process Excellence**
 Campaign repository: **russelldudek/PhilipMorris**  
 Canonical role: **Senior Manager, Business Process Excellence**  
 Canonical branch: **main**  
-Print geography: **A4**
+Audited campaign artifact head: **871bbeb977725c5755655246f250c938f378e223**
 
-## Current canonical additions applied
+## Final canonical refresh
 
-The latest RoleForge `SKILL.md` (`8c8a581daec228cc36bee4c94642193064bcbba3`) and `references/brand-fidelity.md` (`f3c77eff7b9ddca81f2c47cee2a7927228fc5c61`) require an official employer-identity package, source-derived brand tokens, an evidence-based typography decision, visible company identity above the fold, brand continuity across documents, and a Brand Fidelity Audit.
+- `SKILL.md` — `8c8a581daec228cc36bee4c94642193064bcbba3`
+- `references/brand-fidelity.md` — `f3c77eff7b9ddca81f2c47cee2a7927228fc5c61`
+- `memory/portfolio-index.yaml` — `5d4131607b19444cba44c06f6c85448924496144`
+- `memory/anti-clone-ledger.md` — `355a14fb4609d81d060e166101cbcc6150e50481`
 
-The prior campaign failed those requirements because it used a generic blue/cyan palette, Inter, and the Process Genome mark as the primary header identity. This repair corrects that drift.
+The refreshed portfolio and anti-clone ledgers introduce no conflict with the Process Genome. PMI's campaign remains a process-classification sequencer that separates Core, Variant, Mutation, and Evidence and routes them to Protect, Bound, Repair, or Evolve.
 
-## Alignment results
+## Brand fidelity repair
 
-- Official PMI horizontal wordmark committed locally under `assets/brand/`.
-- Wordmark appears above the fold as a real DOM image with `alt="Philip Morris International"`.
-- Immediate qualifier states that the campaign is independent candidate work by Russell Dudek.
-- Source-sampled PMI blue `#0074C2` and source-sampled warm red `#B43403` anchor the recognition layer.
-- Lato is used based on official PMI web-font evidence and open-source availability; no font binaries are committed.
-- White editorial space, strong blue rules, data-led hierarchy, and restrained geometry replace the generic dark SaaS treatment.
-- The Process Genome remains an original role-derived artifact and no longer substitutes for company identity.
-- Resume, cover letter, thesis brief, 120-day plan, objection analysis, and PDFs carry a restrained PMI wordmark and blue rule.
-- Official mark proportions, colors, and composition remain unchanged.
-- Company-specific recommendations remain labeled as hypotheses for discovery.
-- Candidate facts remain grounded in `memory/candidate-evidence.yaml`; no title, metric, scope, or deployment claim was upgraded.
+The earlier campaign used a generic blue/cyan system, Inter, and the Process Genome mark as the primary header identity. The repair now provides:
 
-## Rendered and functional QA
+- locally committed official PMI horizontal wordmark under `assets/brand/`;
+- real DOM wordmark with `alt="Philip Morris International"` above the fold;
+- immediate `by Russell Dudek · independent candidate work` qualifier;
+- source-sampled PMI blue `#0074C2` and warm red `#B43403`;
+- documented source-derived companion tokens;
+- Lato typography based on official PMI web-font evidence;
+- white editorial space, PMI-blue rules, and restrained geometry;
+- clear separation between PMI identity and Russell's Process Genome artifact;
+- matching PMI brand furniture across all HTML documents and generated PDFs.
 
-Browser-development plugin unavailable; Playwright Chromium fallback used with committed HTML/CSS/JS and embedded local assets.
+## QA passed
 
-Passed:
-
-- 1440 × 900 desktop
-- 1280 × 800 laptop
-- 768 × 1024 tablet
-- 390 × 844 mobile
-- 1280 × 800 reduced motion
+- desktop 1440 × 900
+- laptop 1280 × 800
+- tablet 768 × 1024
+- mobile 390 × 844
+- reduced motion 1280 × 800
 - no horizontal overflow
 - no console errors or warnings
-- PMI identity above the fold
-- accessible DOM wordmark and candidate qualifier
+- accessible brand lockup
 - keyboard Process Genome transitions
 - mobile navigation
-- reduced-motion usability
-
-## PDF QA
-
-- Resume: **2 pages**
-- Cover letter: **1 page**
-- Interview thesis brief: **2 pages**
-- 120-day entry plan: **1 page**
-- Hard-objection analysis: **1 page**
-
-All pages were re-rendered after the PMI brand layer was applied. No clipping, blank pages, footer collisions, split modules, or pagination regressions were observed.
+- PDF page counts **2 / 1 / 2 / 1 / 1**
+- no PDF clipping, blank pages, footer collisions, or pagination regressions
 
 ## Publication boundary
 
-The campaign remains **building** until the repaired manifest is verified from final `main` and the live GitHub Pages routes can be checked. No completion claim is made by this record.
+The complete repaired artifact set is on `main`. The campaign remains **building** only because GitHub Pages and its live reciprocal/document/PDF routes could not be independently verified from this environment.
