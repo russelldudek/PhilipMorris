@@ -1,0 +1,14 @@
+:root {
+  /* Philip Morris International recognition layer */
+  --brand-primary: #0074c2; /* source-sampled from official PMI wordmark */
+  --brand-primary-deep: #004a80; /* source-derived accessible dark blue */
+  --brand-primary-soft: #dceefa; /* source-derived light blue */
+  --brand-sky: #52a7d8; /* source-derived blue */
+  --brand-red: #b43403; /* source-sampled warm red from wordmark underline */
+  --brand-ink: #13293d; /* source-derived editorial navy */
+  --brand-graphite: #3d4b57; /* source-derived neutral */
+  --brand-mist: #f3f8fb; /* source-derived page neutral */
+  --brand-white: #ffffff;
+  --brand-line: #c9dbe7;
+  --campaign-accent: #6d8291; /* candidate-original steel; subordinate */
+}

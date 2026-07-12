@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - "scripts/render_pdfs.py"
+      - "scripts/*.py"
+      - "assets/brand/pmi-wordmark.png"
       - ".github/workflows/render-pdfs.yml"
   workflow_dispatch:
 
@@ -45,6 +46,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "PDFs are current."
           else
-            git commit -m "Regenerate campaign PDFs [skip ci]"
+            git commit -m "Regenerate PMI-branded campaign PDFs [skip ci]"
             git push
           fi

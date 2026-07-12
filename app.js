@@ -1,4 +1,33 @@
 (() => {
+  const isArtifact = document.body.classList.contains('artifact-page');
+  document.querySelectorAll('.rf-brand').forEach(brand => {
+    const image = brand.querySelector('img');
+    const label = brand.querySelector('span');
+    const qualifier = brand.querySelector('small');
+    if (image) {
+      image.src = 'assets/brand/pmi-wordmark.png';
+      image.alt = 'Philip Morris International';
+    }
+    if (label) label.textContent = isArtifact
+      ? 'Process Genome · candidate operating artifact'
+      : 'Candidate vision for Business Process Excellence';
+    if (qualifier) qualifier.textContent = 'by Russell Dudek · independent candidate work';
+  });
+
+  const docNav = document.querySelector('.doc-nav');
+  if (docNav && !docNav.querySelector('.doc-company-lockup')) {
+    const lockup = document.createElement('span');
+    lockup.className = 'doc-company-lockup';
+    const logo = document.createElement('img');
+    logo.src = 'assets/brand/pmi-wordmark.png';
+    logo.alt = 'Philip Morris International';
+    const note = document.createElement('small');
+    note.textContent = 'Candidate application by Russell Dudek · independent work';
+    lockup.append(logo, note);
+    docNav.prepend(lockup);
+    docNav.classList.add('has-dom-lockup');
+  }
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const menu = document.querySelector('.rf-menu');
   const links = document.querySelector('#rf-links');

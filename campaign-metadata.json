@@ -11,24 +11,21 @@
   "research_boundary": "The job-posting body was not retrievable; role-specific recommendations are hypotheses for discovery.",
   "campaign_state": "building",
   "canonical_branch": "main",
-  "visual_concept": "Process Genome sequencer and process-contract map",
+  "visual_concept": "PMI editorial identity framing an original Process Genome sequencer and process-contract map",
+  "brand_package": {
+    "wordmark": "assets/brand/pmi-wordmark.png",
+    "tokens": "brand-tokens.css",
+    "overrides": "brand-overrides.css",
+    "intelligence": "brand-intelligence.md",
+    "audit": "BRAND-FIDELITY-AUDIT.md"
+  },
   "role_derived_motion": "Signals scan Core, Variant, Mutation, and Evidence lanes; interactive controls change verdict, decision, failure mode, and proof standard.",
   "minimum_manifest": [
-    "index.html",
-    "resume.html",
-    "cover-letter.html",
-    "interview-brief.html",
-    "120-day-plan.html",
-    "process-genome.html",
-    "hard-objection.html",
-    "styles.css",
-    "app.js",
-    "assets/process-genome-mark.svg",
-    "docs/Russell-Dudek-PMI-Resume.pdf",
-    "docs/Russell-Dudek-PMI-Cover-Letter.pdf",
-    "docs/PMI-Interview-Thesis-Brief.pdf",
-    "docs/PMI-120-Day-Entry-Plan.pdf",
-    "docs/PMI-Hard-Objection-Analysis.pdf",
-    "README.md"
+    "index.html", "resume.html", "cover-letter.html", "interview-brief.html", "120-day-plan.html",
+    "process-genome.html", "hard-objection.html", "styles.css", "brand-tokens.css", "brand-overrides.css",
+    "brand-intelligence.md", "BRAND-FIDELITY-AUDIT.md", "app.js", "assets/brand/pmi-wordmark.png",
+    "assets/process-genome-mark.svg", "docs/Russell-Dudek-PMI-Resume.pdf",
+    "docs/Russell-Dudek-PMI-Cover-Letter.pdf", "docs/PMI-Interview-Thesis-Brief.pdf",
+    "docs/PMI-120-Day-Entry-Plan.pdf", "docs/PMI-Hard-Objection-Analysis.pdf", "README.md"
   ]
 }

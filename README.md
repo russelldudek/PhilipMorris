@@ -10,12 +10,23 @@ Candidate campaign for **Senior Manager, Business Process Excellence** at Philip
 - **Campaign repository:** https://github.com/russelldudek/PhilipMorris
 - **Canonical branch:** `main`
 - **Canonical job posting:** https://join.pmicareers.com/gb/en/job/PMIPMIGB29082EXTERNALENGB/Sr-Manager-Business-Process-Excellence?utm_source=linkedin&utm_medium=phenom-feeds
-- **Target print size:** A4, selected because the supplied listing uses PMI's GB/English career path
+- **Target print size:** A4
 - **Candidate thesis:** The Process Genome
 
 ## Thesis
 
 **The Process Genome:** Business Process Excellence should define the stable core of work, make legitimate local variants explicit, expose harmful process mutations, and evolve standards from evidence.
+
+## Brand fidelity package
+
+- `brand-intelligence.md` — canonical PMI brand research, provenance, token classifications, typography decision, and use boundary
+- `brand-tokens.css` — source-sampled and source-derived PMI recognition tokens
+- `brand-overrides.css` — official identity, PMI editorial system, responsive brand layer, and document continuity
+- `assets/brand/pmi-wordmark.png` — locally served official PMI horizontal wordmark
+- `assets/brand/README.md` — asset provenance and nominative-use boundary
+- `BRAND-FIDELITY-AUDIT.md` — rendered and source-level brand audit
+
+The official PMI wordmark identifies the target employer above the fold. It is paired with an immediate independent-candidate qualifier. The Process Genome mark remains a separate candidate-created operating artifact and does not replace PMI identity.
 
 ## Approved campaign manifest
 
@@ -26,28 +37,27 @@ Candidate campaign for **Senior Manager, Business Process Excellence** at Philip
 - `interview-brief.html` — two-page interview thesis brief
 - `120-day-plan.html` — one-page 120-day entry plan
 - `hard-objection.html` — one-page objection/transferability analysis
-- `styles.css` — shared responsive and print visual system
-- `app.js` — role-derived motion, Process Genome state transitions, mobile navigation, and keyboard interaction
-- `assets/` — locally served original campaign graphics
+- `styles.css` — ordered styling entry point
+- `app.js` — accessible PMI identity bootstrap, role-derived motion, Process Genome transitions, mobile navigation, and keyboard interaction
+- `assets/` — official employer identity package and original campaign graphics
 - `docs/` — generated PDF for every print-oriented artifact
-- `scripts/render_pdfs.py` — reproducible A4 PDF renderer
-- `BRAND-INTELLIGENCE.md` — official-source brand research and usage boundaries
+- `scripts/` — reproducible PDF model and PMI document-branding step
 - `campaign-metadata.json` — machine-readable campaign metadata
-- `ALIGNMENT-AUDIT.md` — canonical RoleForge audit record
-- `CAMPAIGN-COMPLETION-AUDIT.md` — main-branch completion and render evidence
+- `artifact-manifest.json` — branch-verification manifest
+- `ALIGNMENT-AUDIT.md`, `BRAND-FIDELITY-AUDIT.md`, and `CAMPAIGN-COMPLETION-AUDIT.md` — audit records
 
 ## Visual and interaction system
 
-The site uses an original **Process Genome sequencer**. Signals scan four process states—Core, Variant, Mutation, and Evidence—and route to Protect, Bound, Repair, or Evolve decisions. Keyboard-accessible controls teach the decision logic by changing the verdict, failure mode, and evidence standard. Reduced-motion mode removes continuous motion while preserving every state and control.
+PMI’s official wordmark, source-sampled `#0074C2` blue, warm-red underline cue, white editorial space, and Lato typography establish unmistakable employer recognition. Inside that company frame, the original **Process Genome sequencer** scans Core, Variant, Mutation, and Evidence states and routes them to Protect, Bound, Repair, or Evolve decisions. Keyboard-accessible controls change the verdict, failure mode, and evidence standard. Reduced-motion mode removes continuous movement while preserving every state and control.
 
 ## Factual integrity
 
-Career claims trace to RoleForge `memory/candidate-evidence.yaml`. The campaign does not claim direct tobacco or nicotine domain experience. Company-specific recommendations are labeled as hypotheses for discovery rather than PMI internal facts.
+Career claims trace to RoleForge `memory/candidate-evidence.yaml`. The campaign does not claim direct tobacco or nicotine domain experience. Company-specific recommendations are hypotheses for discovery rather than PMI internal facts.
 
 ## Research boundary
 
-The canonical PMI Careers URL is preserved, but its posting body was not retrievable in the research environment. The campaign does not invent JD-specific responsibilities, location, reporting line, qualifications, or internal process facts. Current company context is grounded primarily in official PMI corporate, careers, progress, human-cognition, and Value Report sources.
+The PMI Careers URL is preserved, but its posting body was not retrievable in the research environment. The campaign does not invent JD-specific responsibilities, location, reporting line, qualifications, or internal process facts.
 
 ## Audit status
 
-The complete campaign is committed only after local content, interaction, responsive, reduced-motion, and PDF QA pass. The final audited `main` head and live-site status are recorded in `CAMPAIGN-COMPLETION-AUDIT.md` and the final RoleForge handoff.
+Brand fidelity, source integrity, local rendered behavior, reduced motion, responsive layouts, PDF page counts, and document continuity pass. The campaign remains `building` until GitHub Pages and all live reciprocal/document/PDF routes are independently verified.
