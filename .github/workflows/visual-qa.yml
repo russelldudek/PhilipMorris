@@ -28,21 +28,53 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Prepare official PMI wordmark for rendered QA
+      - name: Prepare the user-selected PMI wordmark for rendered QA
         shell: bash
         run: |
           set -euo pipefail
-          pip install cairosvg pillow
+          pip install pillow
           curl --fail --location --retry 3 --retry-delay 2 \
-            "https://www.pmi.com/resources/images/default-source/default-album/pmi-logoa4f115bd6c7468f696e2ff0400458fff.svg?sfvrsn=37857db4_0" \
-            --output /tmp/pmi-wordmark.svg
-          grep -qi '<svg' /tmp/pmi-wordmark.svg
+            "https://seekvectorlogo.net/wp-content/uploads/2019/10/philip-morris-international-pmi-vector-logo.png" \
+            --output /tmp/pmi-wordmark-source.png
           python - <<'PY'
-          import cairosvg
+          from collections import Counter
           from PIL import Image
-          cairosvg.svg2png(url='/tmp/pmi-wordmark.svg', write_to='assets/brand/pmi-wordmark.png', output_width=1408)
-          image = Image.open('assets/brand/pmi-wordmark.png')
-          assert image.width >= 1000, image.size
+
+          source = Image.open('/tmp/pmi-wordmark-source.png').convert('RGB')
+          assert source.width >= 800 and source.height >= 400, source.size
+          mask = Image.new('L', source.size, 0)
+          mask_px = mask.load()
+          source_px = source.load()
+          for y in range(source.height):
+              for x in range(source.width):
+                  r, g, b = source_px[x, y]
+                  if min(r, g, b) < 248:
+                      mask_px[x, y] = 255
+          bbox = mask.getbbox()
+          assert bbox
+          padding = 12
+          crop = source.crop((
+              max(0, bbox[0] - padding),
+              max(0, bbox[1] - padding),
+              min(source.width, bbox[2] + padding),
+              min(source.height, bbox[3] + padding),
+          ))
+          candidates = [pixel for pixel in crop.getdata() if pixel[2] > pixel[1] > pixel[0] and pixel[0] < 80]
+          dominant = Counter(candidates).most_common(1)[0][0]
+          transparent = Image.new('RGBA', crop.size, dominant + (0,))
+          src = crop.load()
+          dst = transparent.load()
+          denominator = max(1, 255 - dominant[0])
+          for y in range(crop.height):
+              for x in range(crop.width):
+                  r, g, b = src[x, y]
+                  alpha = round((255 - r) / denominator * 255)
+                  alpha = 0 if alpha < 4 else 255 if alpha > 251 else alpha
+                  dst[x, y] = dominant + (max(0, min(255, alpha)),)
+          ratio = transparent.width / transparent.height
+          assert 3.5 <= ratio <= 4.2, (transparent.size, ratio)
+          transparent.save('assets/brand/pmi-wordmark.png', optimize=True)
+          print('QA wordmark:', transparent.size, transparent.mode, dominant)
           PY
       - name: Install Playwright QA dependencies
         run: |
