@@ -1,5 +1,5 @@
 /* PMI candidate campaign visual QA remediation — 2026-07-13
-   Improves official identity clarity, hero-state contrast, tension-system rhythm,
+   Improves employer identity clarity, hero-state contrast, tension-system rhythm,
    dark-surface readability, and application-document contact legibility. */
 
 :root {
@@ -7,29 +7,30 @@
   --qa-on-dark-muted: #d7eaf4;
   --qa-light-muted: #3c5666;
 }
-section[id] { scroll-margin-top: 104px; }
+section[id] { scroll-margin-top: 116px; }
 
-/* Give the official PMI wordmark the scale and clear space it needs. */
+/* Give the user-selected PMI crest-and-wordmark lockup real scale and clear space. */
 .rf-header {
   background: rgba(255,255,255,.985);
   border-bottom-color: rgba(0,74,128,.20);
   box-shadow: 0 8px 30px rgba(0,47,82,.07);
 }
-.rf-nav { min-height: 104px; }
+.rf-nav { min-height: 116px; }
 .rf-brand {
   display: grid;
-  grid-template-columns: 256px;
+  grid-template-columns: 300px;
   grid-template-rows: auto auto;
-  gap: .32rem;
+  gap: .34rem;
   align-items: center;
-  min-width: 256px;
+  min-width: 300px;
   text-decoration: none;
 }
 .rf-brand > img {
   grid-column: 1;
   grid-row: 1;
-  width: 256px;
-  height: 60px;
+  width: 300px;
+  height: auto;
+  max-height: 80px;
   object-fit: contain;
   object-position: left center;
   display: block;
@@ -161,9 +162,9 @@ section[id] { scroll-margin-top: 104px; }
 .rf-footer { color:#d8e8ef;background:var(--qa-deep); }
 .rf-footer::before { color:#bdd2dd; }
 
-/* Dedicated artifact page. */
-.artifact-page .rf-header { background:rgba(0,45,77,.985);border-color:rgba(255,255,255,.20); }
-.artifact-page .rf-brand small,.artifact-page .rf-links a { color:#e5f1f6; }
+/* Dedicated artifact page keeps a white identity rail so the blue PMI mark remains legible. */
+.artifact-page .rf-header { background:rgba(255,255,255,.985);border-color:rgba(0,74,128,.20); }
+.artifact-page .rf-brand small,.artifact-page .rf-links a { color:var(--brand-primary-deep); }
 .artifact-controls button { color:#c9dee8;border-color:rgba(255,255,255,.28); }
 .artifact-controls button span { color:#b2ceda; }
 .artifact-controls button[aria-selected="true"],.artifact-controls button[aria-pressed="true"] {
@@ -179,20 +180,20 @@ section[id] { scroll-margin-top: 104px; }
 .letter-body a { color:var(--brand-primary-deep);font-weight:800;text-decoration:underline;text-underline-offset:2px; }
 
 @media (max-width:1120px) {
-  .rf-brand { grid-template-columns:220px;min-width:220px; }
-  .rf-brand > img { width:220px;height:52px; }
+  .rf-brand { grid-template-columns:250px;min-width:250px; }
+  .rf-brand > img { width:250px;max-height:68px; }
   .rf-links { gap:.82rem; }
 }
 @media (max-width:900px) {
-  .rf-nav { min-height:88px; }
-  .rf-brand { grid-template-columns:188px;min-width:188px; }
-  .rf-brand > img { width:188px;height:44px; }
+  .rf-nav { min-height:96px; }
+  .rf-brand { grid-template-columns:208px;min-width:208px; }
+  .rf-brand > img { width:208px;max-height:57px; }
   .rf-brand small { font-size:.55rem; }
 }
 @media (max-width:780px) {
-  .rf-nav { min-height:80px; }
-  .rf-brand { grid-template-columns:162px;min-width:162px;gap:.18rem; }
-  .rf-brand > img { width:162px;height:38px; }
+  .rf-nav { min-height:86px; }
+  .rf-brand { grid-template-columns:176px;min-width:176px;gap:.18rem; }
+  .rf-brand > img { width:176px;max-height:48px; }
   .rf-brand small { font-size:.49rem;letter-spacing:.07em; }
   .tension-axis { padding-top:2.8rem; }
   .tension-axis::before { left:0;transform:none; }
@@ -206,8 +207,8 @@ section[id] { scroll-margin-top: 104px; }
   .contact { text-align:left; }
 }
 @media (max-width:520px) {
-  .rf-brand { grid-template-columns:144px;min-width:144px; }
-  .rf-brand > img { width:144px;height:34px; }
+  .rf-brand { grid-template-columns:154px;min-width:154px; }
+  .rf-brand > img { width:154px;max-height:43px; }
   .rf-brand small { font-size:.46rem; }
   .sequencer-head { color:#eef8fc; }
 }
