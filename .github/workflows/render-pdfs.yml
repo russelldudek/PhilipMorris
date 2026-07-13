@@ -24,26 +24,68 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install reportlab pypdf cairosvg pillow
-      - name: Retrieve and rasterize the official PMI wordmark
+      - run: pip install reportlab pypdf pillow
+      - name: Retrieve and trim the user-selected PMI wordmark
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p assets/brand
           curl --fail --location --retry 3 --retry-delay 2 \
-            "https://www.pmi.com/resources/images/default-source/default-album/pmi-logoa4f115bd6c7468f696e2ff0400458fff.svg?sfvrsn=37857db4_0" \
-            --output assets/brand/pmi-wordmark.svg
-          grep -qi '<svg' assets/brand/pmi-wordmark.svg
+            "https://seekvectorlogo.net/wp-content/uploads/2019/10/philip-morris-international-pmi-vector-logo.png" \
+            --output assets/brand/pmi-wordmark-source.png
           python - <<'PY'
-          import cairosvg
+          from collections import Counter
+          from pathlib import Path
           from PIL import Image
-          cairosvg.svg2png(url='assets/brand/pmi-wordmark.svg', write_to='assets/brand/pmi-wordmark-hires.png', output_width=1408)
-          Image.open('assets/brand/pmi-wordmark-hires.png').save('assets/brand/pmi-wordmark.png', optimize=True)
-          image = Image.open('assets/brand/pmi-wordmark.png')
-          assert image.width >= 1000, image.size
-          assert image.mode in ('RGBA', 'LA'), image.mode
-          print('PMI wordmark:', image.size, image.mode)
+
+          source_path = Path('assets/brand/pmi-wordmark-source.png')
+          source = Image.open(source_path).convert('RGB')
+          assert source.width >= 800 and source.height >= 400, source.size
+
+          mask = Image.new('L', source.size, 0)
+          mask_px = mask.load()
+          source_px = source.load()
+          for y in range(source.height):
+              for x in range(source.width):
+                  r, g, b = source_px[x, y]
+                  if min(r, g, b) < 248:
+                      mask_px[x, y] = 255
+
+          bbox = mask.getbbox()
+          assert bbox, 'No visible PMI artwork found.'
+          padding = 12
+          left = max(0, bbox[0] - padding)
+          top = max(0, bbox[1] - padding)
+          right = min(source.width, bbox[2] + padding)
+          bottom = min(source.height, bbox[3] + padding)
+          cropped = source.crop((left, top, right, bottom))
+
+          candidates = [
+              pixel for pixel in cropped.getdata()
+              if pixel[2] > pixel[1] > pixel[0] and pixel[0] < 80
+          ]
+          dominant = Counter(candidates).most_common(1)[0][0]
+          transparent = Image.new('RGBA', cropped.size, dominant + (0,))
+          src = cropped.load()
+          dst = transparent.load()
+          denominator = max(1, 255 - dominant[0])
+          for y in range(cropped.height):
+              for x in range(cropped.width):
+                  r, g, b = src[x, y]
+                  alpha = round((255 - r) / denominator * 255)
+                  alpha = 0 if alpha < 4 else 255 if alpha > 251 else alpha
+                  dst[x, y] = dominant + (max(0, min(255, alpha)),)
+
+          ratio = transparent.width / transparent.height
+          assert 3.5 <= ratio <= 4.2, (transparent.size, ratio)
+          transparent.save('assets/brand/pmi-wordmark.png', optimize=True)
+          transparent.resize(
+              (transparent.width * 2, transparent.height * 2),
+              Image.Resampling.LANCZOS,
+          ).save('assets/brand/pmi-wordmark-hires.png', optimize=True)
+          print('PMI wordmark:', transparent.size, transparent.mode, dominant)
           PY
+          rm -f assets/brand/pmi-wordmark.svg
       - run: python scripts/render_pdfs.py
       - name: Verify page counts and contact contract
         run: |
@@ -72,7 +114,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/brand/pmi-wordmark.svg assets/brand/pmi-wordmark.png assets/brand/pmi-wordmark-hires.png docs/*.pdf
+          git add -A assets/brand docs/*.pdf
           if git diff --cached --quiet; then
             echo "Assets and PDFs are current."
           else
