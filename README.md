@@ -21,13 +21,13 @@ Independent candidate campaign for **Senior Manager, Business Process Excellence
 
 - `brand-intelligence.md` — PMI brand research, provenance, token classifications, typography decision, and use boundary
 - `brand-tokens.css` — source-sampled and source-derived PMI recognition tokens
-- `brand-overrides.css` and `visual-qa.css` — official identity, contrast, responsive brand layer, and document continuity
-- `assets/brand/pmi-wordmark.svg` — official PMI horizontal wordmark retrieved directly from PMI
-- `assets/brand/pmi-wordmark.png` and `pmi-wordmark-hires.png` — high-resolution transparent derivatives generated from the official vector
+- `brand-overrides.css` and `visual-qa.css` — employer identity, contrast, responsive brand layer, and document continuity
+- `assets/brand/pmi-wordmark-source.png` — original user-selected crest-and-wordmark transport image
+- `assets/brand/pmi-wordmark.png` and `pmi-wordmark-hires.png` — transparent, tightly trimmed browser and PDF derivatives
 - `assets/brand/README.md` — asset provenance and nominative-use boundary
 - `BRAND-FIDELITY-AUDIT.md` — rendered and source-level brand audit
 
-The official PMI wordmark identifies the target employer above the fold. It is paired with an immediate independent-candidate qualifier. The Process Genome mark remains a separate candidate-created operating artifact and does not replace PMI identity.
+The full PMI crest-and-wordmark lockup identifies the target employer above the fold. It is paired with an immediate independent-candidate qualifier. The Process Genome mark remains a separate candidate-created operating artifact and does not replace PMI identity.
 
 ## Campaign manifest
 
@@ -40,7 +40,7 @@ The official PMI wordmark identifies the target employer above the fold. It is p
 - `hard-objection.html` — one-page objection and transferability analysis
 - `styles.css` — ordered styling entry point
 - `app.js` — role-derived motion, Process Genome transitions, mobile navigation, and keyboard interaction
-- `assets/` — official employer identity package and original campaign graphics
+- `assets/` — employer identity package and original campaign graphics
 - `docs/` — generated PDF for every print-oriented artifact
 - `scripts/` — reproducible PDF model, brand stamping, and rendered visual QA
 - `campaign-metadata.json` and `artifact-manifest.json` — machine-readable campaign records
@@ -48,7 +48,7 @@ The official PMI wordmark identifies the target employer above the fold. It is p
 
 ## Visual and interaction system
 
-PMI’s official wordmark, source-sampled `#0074C2` blue, warm-red detail, white editorial space, and Lato typography establish employer recognition. Inside that company frame, the original **Process Genome sequencer** scans Core, Variant, Mutation, and Evidence states and routes them to Protect, Bound, Repair, or Evolve decisions. All lanes remain readable; the active state gains stronger track, node, edge, and outcome contrast. Keyboard-accessible controls change the verdict, failure mode, and evidence standard. Reduced-motion mode removes continuous movement while preserving every state and control.
+PMI blue, white editorial space, the full crest-and-wordmark lockup, and Lato typography establish employer recognition. Inside that company frame, the original **Process Genome sequencer** scans Core, Variant, Mutation, and Evidence states and routes them to Protect, Bound, Repair, or Evolve decisions. All lanes remain readable; the active state gains stronger track, node, edge, and outcome contrast. Keyboard-accessible controls change the verdict, failure mode, and evidence standard. Reduced-motion mode removes continuous movement while preserving every state and control.
 
 ## Candidate contact
 
