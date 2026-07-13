@@ -58,15 +58,15 @@ jobs:
             'PMI-Hard-Objection-Analysis.pdf': 1,
           }
           required = ['412.287.8640', 'russelldudek@gmail.com', 'linkedin.com/in/russelldudek', 'github.com/russelldudek/PhilipMorris']
+          extracted = {}
           for name, pages in expected.items():
               reader = PdfReader(str(Path('docs') / name))
               assert len(reader.pages) == pages, f'{name}: expected {pages}, got {len(reader.pages)}'
-              text = '\n'.join(page.extract_text() or '' for page in reader.pages)
+              text = ' '.join(' '.join((page.extract_text() or '').split()) for page in reader.pages)
+              extracted[name] = text
               for value in required:
                   assert value in text, f'{name}: missing {value}'
-          cover = PdfReader('docs/Russell-Dudek-PMI-Cover-Letter.pdf')
-          cover_text = '\n'.join(page.extract_text() or '' for page in cover.pages)
-          assert 'The repository contains the candidate vision' in cover_text
+          assert 'The repository contains the candidate vision' in extracted['Russell-Dudek-PMI-Cover-Letter.pdf']
           PY
       - name: Commit generated assets and PDFs
         run: |
