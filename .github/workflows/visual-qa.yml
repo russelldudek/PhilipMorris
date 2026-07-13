@@ -60,6 +60,12 @@ jobs:
           exit 1
       - name: Run multi-viewport, interaction, contrast, and contact QA
         run: node scripts/visual_qa.mjs
+      - name: Preserve official asset evidence
+        if: always()
+        run: |
+          mkdir -p qa-output/brand
+          cp /tmp/pmi-wordmark.svg qa-output/brand/pmi-wordmark.svg
+          cp assets/brand/pmi-wordmark.png qa-output/brand/pmi-wordmark.png
       - name: Upload rendered QA evidence
         if: always()
         uses: actions/upload-artifact@v4
