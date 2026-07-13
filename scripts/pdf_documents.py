@@ -1,4 +1,5 @@
 from pdf_common import *
+
 def resume():
     s=[header("Russell Dudek","Business Process Excellence & Transformation Operator")]
     s+=section("Executive Profile")+[P("Operator-technologist who makes complex work visible, connects technical and business teams, and builds operating mechanisms that turn transformation into adopted, measurable outcomes. Career spans AI-first operations, manufacturing and quality systems, high-reliability technical programs, 24/7 logistics, distributed commercial operations, and agentic workflow design.","summary")]
@@ -14,7 +15,7 @@ def resume():
         role("Amazon","Operations Management / Site Leader","2014–2018",[
         "Led launch and execution for Amazon Prime Pittsburgh in a 24/7 customer-backward environment supporting approximately five million second-day orders annually.",
         "Built leadership routines, labor planning, throughput visibility, escalation paths, standard work, and operating mechanisms; applied Lean and Gemba practices across safety, quality, throughput, customer experience, and engagement."])]
-    s+=[PageBreak(),header("Russell Dudek","Business Process Excellence & Transformation Operator","Candidate Vision · Resume")]
+    s+=[PageBreak(),header("Russell Dudek","Business Process Excellence & Transformation Operator")]
     s+=section("Professional Experience, Continued")
     s+=[role("Compunetics","Director of Operations and Engineering Management","2000–2013",[
         "Progressed through R&D program management, production management, strategic acquisition, operations management, and director-level leadership.",
@@ -33,23 +34,22 @@ def resume():
         ("University of Pittsburgh","Bachelor of Science; academic grounding includes materials science, physical chemistry, and biology-related studies."),
         ("Credentials","IBM Enterprise Design Thinking Practitioner · Six Sigma Certification · OSHA 10")],2)]
     s+=section("Technical Toolkit")+[P("Agentic AI · LLM workflows · RAG patterns · human-in-the-loop design · Python · SQL · JavaScript · TensorFlow · Tableau · ERP/Odoo · Jira · Confluence · HubSpot · Slack · GIS and mapping", "small")]
-    build("Russell-Dudek-PMI-Resume.pdf",s,"Russell Dudek · PMI role-aligned resume")
-
+    build("Russell-Dudek-PMI-Resume.pdf",s,"Russell Dudek · 412.287.8640 · russelldudek@gmail.com")
 
 def cover_letter():
     s=[header("Russell Dudek","Senior Manager, Business Process Excellence · PMI")]
-    s += [Spacer(1,10),P("11 July 2026<br/><br/>Hiring Team<br/>Philip Morris International","body")]
+    s += [Spacer(1,7),P("13 July 2026<br/><br/>Hiring Team<br/>Philip Morris International","body")]
     paras=[
-    "PMI’s transformation creates a process-excellence problem that is more consequential than eliminating waste. A global enterprise is scaling a fast-growing smoke-free portfolio while still operating across different products, markets, channels, systems, and regulatory realities. The central question is how to know what must stay stable, what may legitimately vary, where process debt is hiding, and when evidence justifies changing the standard.",
+    "PMI’s transformation creates a process-excellence problem more consequential than eliminating waste. A global enterprise is scaling a fast-growing smoke-free portfolio while operating across different products, markets, channels, systems, and regulatory realities. The central question is how to know what must stay stable, what may legitimately vary, where process debt is hiding, and when evidence justifies changing the standard.",
     "That is the work I have spent my career doing from inside operations. At Vape-Jet, I lead AI-first operating transformation across production, purchasing, quality, customer success, support, engineering issue flow, ERP/Odoo, Jira, HubSpot, Slack, telemetry, and AI-assisted workflows. At Amazon, I built operating mechanisms and escalation paths in a 24/7 customer-backward environment supporting approximately five million second-day orders annually. At Compunetics, I led engineering, manufacturing, quality, customer delivery, and high-reliability technical programs.",
-    "My thesis for the role is practical: Business Process Excellence should function as a <b>Process Genome</b>. Define the stable enterprise core of a process. Make legitimate market or regulatory variants explicit and reviewable. Expose harmful mutations such as workarounds, duplicate approvals, hidden queues, and zombie exceptions. Evolve the standard only when evidence shows a better way to create value, control risk, and sustain adoption.",
+    "My thesis is practical: Business Process Excellence should function as a <b>Process Genome</b>. Define the stable enterprise core of a process. Make legitimate market or regulatory variants explicit and reviewable. Expose harmful mutations such as workarounds, duplicate approvals, hidden queues, and zombie exceptions. Evolve the standard only when evidence shows a better way to create value, control risk, and sustain adoption.",
+    'I made that reasoning inspectable in the independent candidate campaign at <link href="https://github.com/russelldudek/PhilipMorris"><b>github.com/russelldudek/PhilipMorris</b></link>. The repository contains the candidate vision, interactive Process Genome, 120-day plan, and role-aligned application documents. It is a hypothesis for discussion—not a claim about PMI’s internal process architecture.',
     "I would bring AI into the role with restraint. Automation is not the objective; better work is. Simplify and clarify the process first, then use AI or automation where context is sufficient, authority is explicit, economics are credible, and human judgment remains where consequence or ambiguity requires it.",
     "The obvious concern is that I have not spent my career inside tobacco or nicotine. That concern is fair. I would not confuse adjacent experience with domain mastery. What I bring is direct experience across manufacturing, quality, logistics, enterprise workflows, regulated operations, technical customer delivery, and AI-enabled work—plus a record of learning complex systems quickly and translating them into mechanisms people can use.",
     "I would welcome the opportunity to discuss where PMI’s greatest process friction sits today, how the organization distinguishes legitimate variation from process debt, and what success in this role must change for both executives and frontline users."
     ]
-    s += [P(x,"letter") for x in paras] + [Spacer(1,5),P("Carpe diem,<br/><b>Russell Dudek</b>","letter")]
-    build("Russell-Dudek-PMI-Cover-Letter.pdf",s,"Russell Dudek · PMI cover letter")
-
+    s += [P(x,"letter") for x in paras] + [Spacer(1,2),P("Carpe diem,<br/><b>Russell Dudek</b>","letter")]
+    build("Russell-Dudek-PMI-Cover-Letter.pdf",s,"Russell Dudek · 412.287.8640 · github.com/russelldudek/PhilipMorris", margins=(15,15,11,14))
 
 def brief():
     s=[header("Interview Thesis Brief","PMI · Senior Manager, Business Process Excellence")]
@@ -70,7 +70,6 @@ def brief():
     s+=section("Research Basis")+[P("Official PMI corporate site and Q1 2026 progress indicators; PMI Value Report 2025 hub; PMI Careers overview; PMI ‘The human edge in the age of AI.’ The original job URL is preserved, but its body remained unavailable; no JD-specific responsibility or qualification was invented.","small")]
     build("PMI-Interview-Thesis-Brief.pdf",s,"Russell Dudek · PMI interview thesis brief")
 
-
 def entry_plan():
     s=[header("120-Day Entry Plan","PMI · Senior Manager, Business Process Excellence")]
     s+=section("Entry Principle")+[P("<b>Earn the right to standardize.</b> Begin by learning where process truth lives, how variation is justified, where ownership breaks, and which measures already have credibility. Produce proof—not a theater of templates.","summary")]
@@ -82,7 +81,6 @@ def entry_plan():
     t=Table(data,colWidths=[18*mm,38*mm,124*mm]);t.setStyle(TableStyle([("GRID",(0,0),(-1,-1),.5,LINE),("BACKGROUND",(0,0),(-1,0),LIGHT),("VALIGN",(0,0),(-1,-1),"TOP"),("PADDING",(0,0),(-1,-1),6)]));s+=section("Work Plan")+[t]
     s+=section("Guardrails")+[grid([("No improvement theater","Maps and workshops are inputs; changed decisions, handoffs, controls, flow, economics, and adoption are outcomes."),("No global uniformity fiction","Required market and regulatory variation stays visible and governed."),("No automation before clarity","Simplify, remove, and clarify first; automate only stable work with explicit authority."),("No benefit without sustainment","A change succeeds only when the business owns it after project support recedes.")])]
     build("PMI-120-Day-Entry-Plan.pdf",s,"Russell Dudek · PMI 120-day entry plan")
-
 
 def objection():
     s=[header("Hard-Objection Analysis","PMI · Senior Manager, Business Process Excellence")]

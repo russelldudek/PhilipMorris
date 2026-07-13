@@ -1,0 +1,222 @@
+/* PMI candidate campaign visual QA remediation — 2026-07-13
+   Improves official identity clarity, hero-state contrast, tension-system rhythm,
+   dark-surface readability, and application-document contact legibility. */
+
+:root {
+  --qa-deep: #002d4d;
+  --qa-on-dark-muted: #d7eaf4;
+  --qa-light-muted: #3c5666;
+}
+section[id] { scroll-margin-top: 104px; }
+
+/* Give the official PMI wordmark the scale and clear space it needs. */
+.rf-header {
+  background: rgba(255,255,255,.985);
+  border-bottom-color: rgba(0,74,128,.20);
+  box-shadow: 0 8px 30px rgba(0,47,82,.07);
+}
+.rf-nav { min-height: 104px; }
+.rf-brand {
+  display: grid;
+  grid-template-columns: 256px;
+  grid-template-rows: auto auto;
+  gap: .32rem;
+  align-items: center;
+  min-width: 256px;
+  text-decoration: none;
+}
+.rf-brand > img {
+  grid-column: 1;
+  grid-row: 1;
+  width: 256px;
+  height: 60px;
+  object-fit: contain;
+  object-position: left center;
+  display: block;
+}
+.rf-brand span { display: none; }
+.rf-brand small {
+  grid-column: 1;
+  grid-row: 2;
+  color: var(--brand-primary-deep);
+  font-size: .64rem;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: .105em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.rf-links a { color: var(--brand-ink); }
+.rf-links a:hover,.rf-links a:focus-visible { color: var(--brand-primary-deep); }
+
+/* Light-surface text contrast. */
+.rf-lede,.rf-boundary,.rf-source-note,.metric-ribbon span,
+.rf-mandate-intro > p:last-child,.rf-topology-copy > p:last-child,
+.rf-proof-lead > p:last-child,.evidence-trail p,.evidence-stack p,
+.rf-illustrative,.rf-sources ol,.rf-sources > p { color: var(--qa-light-muted); }
+
+/* Consistent button contrast. */
+.campaign-site a.rf-button { color:#fff;background:var(--brand-primary);border-color:var(--brand-primary); }
+.campaign-site a.rf-button-quiet { color:var(--brand-primary-deep);background:#fff;border-color:var(--brand-primary); }
+.rf-close .rf-button { color:var(--brand-primary-deep);background:#fff;border-color:#fff; }
+.rf-close .rf-button-quiet { color:#fff;background:transparent;border-color:rgba(255,255,255,.86); }
+
+/* Hero sequencer: every state stays readable; the active state is decisive. */
+.sequencer {
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.036) 1px,transparent 1px),
+    linear-gradient(180deg,rgba(255,255,255,.036) 1px,transparent 1px),
+    linear-gradient(150deg,#001f36 0%,#004f7d 56%,#002b49 100%);
+  background-size:24px 24px,24px 24px,auto;
+  border:1px solid rgba(255,255,255,.62);
+  box-shadow:0 34px 82px rgba(0,47,82,.38);
+}
+.sequencer::before { display:none; }
+.sequencer::after { opacity:.24; }
+.sequencer-top { color:#f1f9fc;border-bottom-color:rgba(255,255,255,.38);font-weight:900; }
+.sequencer-status { color:#fff; }
+.sequencer-status i {
+  width:11px;height:11px;background:var(--active-gene);border:2px solid #fff;
+  box-shadow:0 0 0 6px rgba(255,255,255,.15),0 0 24px var(--active-gene);
+}
+.sequencer-head { color:#e8f4f9;font-weight:900;opacity:1; }
+.gene-lane {
+  opacity:1;
+  border-bottom-color:rgba(255,255,255,.24);
+  transition:transform .28s ease,background .28s ease,box-shadow .28s ease;
+}
+.gene-lane > b,.gene-outcome {
+  color:#d7e9f2 !important;
+  font-weight:850;
+  text-shadow:0 1px 12px rgba(0,0,0,.36);
+}
+.gene-lane.is-active {
+  transform:translateX(6px);
+  background:linear-gradient(90deg,rgba(255,255,255,.22),rgba(255,255,255,.07));
+  box-shadow:inset 5px 0 0 var(--active-gene),0 0 0 1px rgba(255,255,255,.08);
+}
+.gene-lane.is-active > b,.gene-lane.is-active .gene-outcome { color:#fff !important;font-weight:950; }
+.gene-track { height:4px;background:rgba(225,244,252,.58);overflow:visible; }
+.gene-track::before,.gene-track::after { background:rgba(236,249,254,.48); }
+.gene-lane.is-active .gene-track {
+  background:linear-gradient(90deg,#fff 0%,var(--active-gene) 52%,#fff 100%);
+  box-shadow:0 0 20px color-mix(in srgb,var(--active-gene) 78%,white);
+}
+.gene-track .node { width:12px;height:12px;background:#d3ebf5;border:2px solid #225b7b; }
+.gene-lane.is-active .node {
+  background:#fff;border-color:var(--active-gene);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--active-gene) 40%,transparent),0 0 24px #fff;
+}
+.gene-track .pulse {
+  width:18px;height:18px;border:4px solid #fff;background:var(--active-gene);
+  box-shadow:0 0 0 5px color-mix(in srgb,var(--active-gene) 42%,transparent),0 0 30px #fff;
+  z-index:4;
+}
+.sequencer-foot {
+  background:#f8fbfd;border:1px solid #fff;
+  box-shadow:0 10px 28px rgba(0,27,47,.24);
+}
+.sequencer-foot span { color:#31586e;font-weight:900; }
+.sequencer-foot strong { color:#082f48;font-weight:900; }
+
+/* One shared governing cue replaces five repeated instruction pills. */
+.tension-axis { padding-top:3.1rem; }
+.tension-axis::before {
+  content:"FIVE TENSIONS TO GOVERN";
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  color:var(--brand-primary-deep);font-size:.65rem;font-weight:950;
+  letter-spacing:.15em;white-space:nowrap;
+}
+.tension-axis article { grid-template-columns:46px minmax(0,1fr) 72px minmax(0,1fr);gap:1.1rem; }
+.tension-axis article > i {
+  display:grid;place-items:center;min-width:72px;position:relative;
+  color:transparent;font-size:0;background:none;border:0;border-radius:0;padding:0;
+}
+.tension-axis article > i::before {
+  content:"";width:100%;height:2px;
+  background:linear-gradient(90deg,var(--brand-primary),var(--brand-red));
+}
+.tension-axis article > i::after {
+  content:"↔";position:absolute;padding:0 .46rem;color:var(--brand-primary-deep);
+  background:#fff;font-size:1.02rem;font-style:normal;font-weight:900;line-height:1;
+}
+.tension-axis article > strong { color:var(--brand-ink); }
+
+/* Dark-section contrast. */
+.rf-genome-copy > p:first-child,.rf-objection > div > p:first-child,
+.artifact-intro > p:first-child { color:#c7ebfb; }
+.rf-genome-copy > p:nth-of-type(2),.rf-objection > div:last-child > p,
+.artifact-intro > p:last-child { color:var(--qa-on-dark-muted); }
+.genome-controls button { color:#d4e7ef;border-bottom-color:rgba(255,255,255,.30); }
+.genome-controls button.is-active,.genome-controls button[aria-pressed="true"] {
+  color:#fff;background:rgba(255,255,255,.12);
+}
+.genome-stage { border-color:rgba(255,255,255,.34);background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.06)); }
+.genome-stage-visual > span,.artifact-detail > p { color:#fff; }
+.genome-stage-copy dt,.artifact-detail dt { color:#c6dce7; }
+.genome-stage-copy dd,.artifact-detail dd { color:#f5fafc; }
+.map-core small { color:#d6e7ef; }.map-core b { color:#e8f1f5; }
+.rf-objection h2,.rf-objection strong { color:#fff; }
+.rf-close > div > p { color:#ecf7fb; }
+.rf-footer { color:#d8e8ef;background:var(--qa-deep); }
+.rf-footer::before { color:#bdd2dd; }
+
+/* Dedicated artifact page. */
+.artifact-page .rf-header { background:rgba(0,45,77,.985);border-color:rgba(255,255,255,.20); }
+.artifact-page .rf-brand small,.artifact-page .rf-links a { color:#e5f1f6; }
+.artifact-controls button { color:#c9dee8;border-color:rgba(255,255,255,.28); }
+.artifact-controls button span { color:#b2ceda; }
+.artifact-controls button[aria-selected="true"],.artifact-controls button[aria-pressed="true"] {
+  color:#fff;background:rgba(255,255,255,.10);
+}
+.artifact-signal small,.artifact-verdict small { color:#c5dbe5; }
+.artifact-signal strong { color:#fff; }.artifact-path { background:rgba(255,255,255,.40); }
+
+/* Application document contact/link contract. */
+.resume-head { grid-template-columns:minmax(0,1fr) 76mm;gap:9mm;align-items:start; }
+.contact { font-size:7.6pt;line-height:1.42;color:#334d5d;overflow-wrap:anywhere; }
+.contact a { color:var(--brand-primary-deep);text-decoration:none;border-bottom:.5px solid rgba(0,74,128,.32); }
+.letter-body a { color:var(--brand-primary-deep);font-weight:800;text-decoration:underline;text-underline-offset:2px; }
+
+@media (max-width:1120px) {
+  .rf-brand { grid-template-columns:220px;min-width:220px; }
+  .rf-brand > img { width:220px;height:52px; }
+  .rf-links { gap:.82rem; }
+}
+@media (max-width:900px) {
+  .rf-nav { min-height:88px; }
+  .rf-brand { grid-template-columns:188px;min-width:188px; }
+  .rf-brand > img { width:188px;height:44px; }
+  .rf-brand small { font-size:.55rem; }
+}
+@media (max-width:780px) {
+  .rf-nav { min-height:80px; }
+  .rf-brand { grid-template-columns:162px;min-width:162px;gap:.18rem; }
+  .rf-brand > img { width:162px;height:38px; }
+  .rf-brand small { font-size:.49rem;letter-spacing:.07em; }
+  .tension-axis { padding-top:2.8rem; }
+  .tension-axis::before { left:0;transform:none; }
+  .tension-axis article { grid-template-columns:36px 1fr;gap:.45rem 1rem;padding:1.25rem 0; }
+  .tension-axis article > strong:first-of-type,.tension-axis article > strong:last-child { grid-column:2;text-align:left; }
+  .tension-axis article > i { grid-column:2;width:48px;min-width:48px;height:18px;justify-self:start; }
+  .tension-axis article > i::before { position:absolute;top:50%;width:48px; }
+  .tension-axis article > i::after { left:11px;top:1px;font-size:.9rem; }
+  .axis-line { left:17px; }
+  .resume-head { grid-template-columns:1fr;gap:8pt; }
+  .contact { text-align:left; }
+}
+@media (max-width:520px) {
+  .rf-brand { grid-template-columns:144px;min-width:144px; }
+  .rf-brand > img { width:144px;height:34px; }
+  .rf-brand small { font-size:.46rem; }
+  .sequencer-head { color:#eef8fc; }
+}
+@media print {
+  .resume-head { grid-template-columns:minmax(0,1fr) 76mm;gap:8mm; }
+  .contact { font-size:7.1pt;line-height:1.34; }
+  .contact a { border-bottom:0; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .gene-lane.is-active { background:linear-gradient(90deg,rgba(255,255,255,.22),rgba(255,255,255,.07)); }
+  .gene-lane.is-active .gene-track { box-shadow:0 0 12px color-mix(in srgb,var(--active-gene) 68%,white); }
+}

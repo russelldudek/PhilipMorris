@@ -6,6 +6,8 @@ on:
     paths:
       - "scripts/*.py"
       - "assets/brand/pmi-wordmark.png"
+      - "resume.html"
+      - "cover-letter.html"
       - ".github/workflows/render-pdfs.yml"
   workflow_dispatch:
 
@@ -17,12 +19,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install reportlab pypdf
+      - run: pip install reportlab pypdf cairosvg pillow
+      - name: Retrieve and rasterize the official PMI wordmark
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/brand
+          curl --fail --location --retry 3 --retry-delay 2 \
+            "https://www.pmi.com/resources/images/default-source/default-album/pmi-logoa4f115bd6c7468f696e2ff0400458fff.svg?sfvrsn=37857db4_0" \
+            --output assets/brand/pmi-wordmark.svg
+          grep -qi '<svg' assets/brand/pmi-wordmark.svg
+          python - <<'PY'
+          import cairosvg
+          from PIL import Image
+          cairosvg.svg2png(url='assets/brand/pmi-wordmark.svg', write_to='assets/brand/pmi-wordmark-hires.png', output_width=1408)
+          Image.open('assets/brand/pmi-wordmark-hires.png').save('assets/brand/pmi-wordmark.png', optimize=True)
+          image = Image.open('assets/brand/pmi-wordmark.png')
+          assert image.width >= 1000, image.size
+          assert image.mode in ('RGBA', 'LA'), image.mode
+          print('PMI wordmark:', image.size, image.mode)
+          PY
       - run: python scripts/render_pdfs.py
-      - name: Verify page counts
+      - name: Verify page counts and contact contract
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -34,18 +57,25 @@ jobs:
             'PMI-120-Day-Entry-Plan.pdf': 1,
             'PMI-Hard-Objection-Analysis.pdf': 1,
           }
+          required = ['412.287.8640', 'russelldudek@gmail.com', 'linkedin.com/in/russelldudek', 'github.com/russelldudek/PhilipMorris']
           for name, pages in expected.items():
-              actual = len(PdfReader(str(Path('docs') / name)).pages)
-              assert actual == pages, f'{name}: expected {pages}, got {actual}'
+              reader = PdfReader(str(Path('docs') / name))
+              assert len(reader.pages) == pages, f'{name}: expected {pages}, got {len(reader.pages)}'
+              text = '\n'.join(page.extract_text() or '' for page in reader.pages)
+              for value in required:
+                  assert value in text, f'{name}: missing {value}'
+          cover = PdfReader('docs/Russell-Dudek-PMI-Cover-Letter.pdf')
+          cover_text = '\n'.join(page.extract_text() or '' for page in cover.pages)
+          assert 'The repository contains the candidate vision' in cover_text
           PY
-      - name: Commit generated PDFs
+      - name: Commit generated assets and PDFs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/*.pdf
+          git add assets/brand/pmi-wordmark.svg assets/brand/pmi-wordmark.png assets/brand/pmi-wordmark-hires.png docs/*.pdf
           if git diff --cached --quiet; then
-            echo "PDFs are current."
+            echo "Assets and PDFs are current."
           else
-            git commit -m "Regenerate PMI-branded campaign PDFs [skip ci]"
+            git commit -m "Regenerate PMI application assets and PDFs [skip ci]"
             git push
           fi

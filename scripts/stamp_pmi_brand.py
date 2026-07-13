@@ -1,4 +1,4 @@
-"""Apply the restrained PMI identity layer to generated campaign PDFs."""
+"""Apply a restrained PMI identity layer to generated application PDFs."""
 from io import BytesIO
 from pathlib import Path
 from reportlab.pdfgen.canvas import Canvas
@@ -8,10 +8,11 @@ from pypdf import PdfReader, PdfWriter
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs"
-LOGO = ROOT / "assets" / "brand" / "pmi-wordmark.png"
+HIRES = ROOT / "assets" / "brand" / "pmi-wordmark-hires.png"
+FALLBACK = ROOT / "assets" / "brand" / "pmi-wordmark.png"
+LOGO = HIRES if HIRES.exists() else FALLBACK
 BLUE = HexColor("#0074C2")
 DEEP = HexColor("#004A80")
-
 
 def stamp_pdf(path: Path) -> None:
     reader = PdfReader(str(path))
@@ -23,7 +24,7 @@ def stamp_pdf(path: Path) -> None:
         canvas = Canvas(buffer, pagesize=(width, height))
         canvas.setFillColor(BLUE)
         canvas.rect(0, height - 5, width, 5, stroke=0, fill=1)
-        logo_width = 92
+        logo_width = 112
         logo_height = logo_width * (40 / 176)
         x = width - 43 - logo_width
         y = 12
@@ -43,11 +44,9 @@ def stamp_pdf(path: Path) -> None:
         writer.write(handle)
     temporary.replace(path)
 
-
 def stamp_all() -> None:
     for path in sorted(OUT.glob("*.pdf")):
         stamp_pdf(path)
-
 
 if __name__ == "__main__":
     stamp_all()
