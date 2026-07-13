@@ -1,0 +1,382 @@
+/* PMI visual QA remediation — 2026-07-13
+   Fixes identity clarity, contrast, hero-state legibility, and tension repetition. */
+
+:root {
+  --qa-dark: #002f52;
+  --qa-dark-2: #004a78;
+  --qa-on-dark: #f7fbfd;
+  --qa-on-dark-muted: #d6e7f0;
+  --qa-on-dark-subtle: #b9d2df;
+  --qa-light-text: #2f4858;
+  --qa-light-muted: #405a6a;
+  --qa-signal: #8edcff;
+  --qa-signal-hot: #ffffff;
+}
+
+section[id] { scroll-margin-top: 108px; }
+
+/* Cleaner identity lockup: preserve the official mark at its natural aspect ratio,
+   remove the cramped redundant title next to it, and keep the candidate qualifier. */
+.rf-nav { min-height: 84px; }
+.rf-brand {
+  display: grid;
+  grid-template-columns: 176px 1px minmax(180px, 230px);
+  grid-template-rows: auto;
+  align-items: center;
+  column-gap: 1rem;
+  min-width: 410px;
+}
+.rf-brand::after {
+  content: "";
+  width: 1px;
+  height: 30px;
+  background: var(--brand-line);
+  grid-column: 2;
+  grid-row: 1;
+}
+.rf-brand > img {
+  width: 176px;
+  height: 40px;
+  object-fit: contain;
+  object-position: left center;
+  grid-column: 1;
+  grid-row: 1;
+}
+.rf-brand span { display: none; }
+.rf-brand small {
+  grid-column: 3;
+  grid-row: 1;
+  color: var(--brand-primary-deep);
+  font-size: .66rem;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+  max-width: 23ch;
+}
+
+/* Light-surface contrast */
+.rf-lede,
+.rf-boundary,
+.rf-source-note,
+.metric-ribbon span,
+.rf-mandate-intro > p:last-child,
+.rf-topology-copy > p:last-child,
+.rf-proof-lead > p:last-child,
+.evidence-trail p,
+.evidence-stack p,
+.rf-illustrative,
+.rf-sources ol,
+.rf-sources > p {
+  color: var(--qa-light-muted);
+}
+.rf-links a { color: var(--brand-ink); }
+.rf-links a:hover,
+.rf-links a:focus-visible { color: var(--brand-primary-deep); }
+
+/* Button specificity repair. The base stylesheet previously allowed dark text on
+   the PMI-blue primary button. */
+.campaign-site a.rf-button {
+  color: #fff;
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+.campaign-site a.rf-button-quiet {
+  color: var(--brand-primary-deep);
+  background: #fff;
+  border-color: var(--brand-primary);
+}
+.rf-close .rf-button {
+  background: #fff;
+  border-color: #fff;
+  color: var(--brand-primary-deep);
+}
+.rf-close .rf-button-quiet {
+  background: transparent;
+  border-color: rgba(255,255,255,.78);
+  color: #fff;
+}
+
+/* Hero sequencer: decisive state contrast and an unmistakable moving signal. */
+.sequencer {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(155deg, var(--qa-dark) 0%, #004f80 58%, #003658 100%);
+  background-size: 24px 24px, 24px 24px, auto;
+  border: 1px solid rgba(255,255,255,.42);
+  box-shadow: 0 34px 82px rgba(0,47,82,.30);
+}
+.sequencer-top {
+  color: #d8ebf4;
+  border-bottom-color: rgba(255,255,255,.24);
+}
+.sequencer-status { color: #fff; }
+.sequencer-status i {
+  background: #fff;
+  border: 2px solid var(--active-gene);
+  box-shadow: 0 0 0 6px rgba(255,255,255,.12), 0 0 22px var(--active-gene);
+}
+.sequencer-head {
+  color: #c6dce8;
+  font-weight: 800;
+}
+.gene-lane {
+  opacity: .76;
+  border-bottom-color: rgba(255,255,255,.16);
+  transition: opacity .28s ease, transform .28s ease, background .28s ease, box-shadow .28s ease;
+}
+.gene-lane > b,
+.gene-outcome {
+  color: #c2d8e4 !important;
+  text-shadow: 0 1px 12px rgba(0,0,0,.22);
+}
+.gene-lane.is-active {
+  opacity: 1;
+  transform: translateX(5px);
+  background: linear-gradient(90deg, rgba(255,255,255,.14), rgba(255,255,255,.035));
+  box-shadow: inset 3px 0 0 var(--active-gene);
+}
+.gene-lane.is-active > b,
+.gene-lane.is-active .gene-outcome {
+  color: #fff !important;
+  font-weight: 900;
+}
+.gene-track {
+  height: 4px;
+  background: rgba(255,255,255,.32);
+  overflow: visible;
+}
+.gene-track::before,
+.gene-track::after {
+  background: rgba(255,255,255,.28);
+}
+.gene-lane.is-active .gene-track::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: 4px;
+  left: 0;
+  background: linear-gradient(90deg, #fff 0%, var(--active-gene) 58%, #fff 100%);
+  transform-origin: left;
+  animation: qa-track-charge 2.6s cubic-bezier(.32,.72,.24,1) infinite;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--active-gene) 86%, white);
+}
+@keyframes qa-track-charge {
+  0% { transform: scaleX(.03); opacity: .35; }
+  78% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: .2; }
+}
+.gene-track .node {
+  width: 11px;
+  height: 11px;
+  background: #a8c0ce;
+  border: 2px solid var(--qa-dark);
+}
+.gene-lane.is-active .node {
+  background: #fff;
+  border-color: var(--active-gene);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--active-gene) 35%, transparent), 0 0 22px #fff;
+}
+.gene-track .pulse {
+  width: 17px;
+  height: 17px;
+  border: 4px solid #fff;
+  background: var(--active-gene);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--active-gene) 38%, transparent), 0 0 26px #fff;
+  z-index: 4;
+}
+.sequencer-foot {
+  background: rgba(255,255,255,.11);
+  border: 1px solid rgba(255,255,255,.18);
+}
+.sequencer-foot span { color: #c6dce8; }
+.sequencer-foot strong { color: #fff; }
+
+/* One governing label, not five identical pills. Each row uses a quiet
+   bidirectional connector to show the trade-off. */
+.tension-axis { padding-top: 3rem; }
+.tension-axis::before {
+  content: "FIVE TENSIONS TO GOVERN";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--brand-primary-deep);
+  font-size: .64rem;
+  font-weight: 900;
+  letter-spacing: .14em;
+  white-space: nowrap;
+}
+.tension-axis article {
+  grid-template-columns: 46px minmax(0,1fr) 64px minmax(0,1fr);
+  gap: 1.1rem;
+}
+.tension-axis article > i {
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  color: transparent;
+  font-size: 0;
+  min-width: 64px;
+  position: relative;
+}
+.tension-axis article > i::before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-red));
+}
+.tension-axis article > i::after {
+  content: "↔";
+  position: absolute;
+  color: var(--brand-primary-deep);
+  background: #fff;
+  padding: 0 .45rem;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1;
+}
+.tension-axis article > strong { color: var(--brand-ink); }
+
+/* Dark-section contrast audit */
+.rf-genome-copy > p:first-child,
+.rf-objection > div > p:first-child,
+.artifact-intro > p:first-child { color: #bfe7fb; }
+.rf-genome-copy > p:nth-of-type(2),
+.rf-objection > div:last-child > p,
+.artifact-intro > p:last-child { color: var(--qa-on-dark-muted); }
+.genome-controls button {
+  color: #c6dae5;
+  border-bottom-color: rgba(255,255,255,.24);
+}
+.genome-controls button.is-active,
+.genome-controls button[aria-pressed=true] {
+  color: #fff;
+  background: rgba(255,255,255,.08);
+}
+.genome-stage {
+  border-color: rgba(255,255,255,.28);
+  background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.045));
+}
+.genome-stage-visual > span,
+.artifact-detail > p { color: #fff; }
+.genome-stage-copy dt,
+.artifact-detail dt { color: #c0d7e3; }
+.genome-stage-copy dd,
+.artifact-detail dd { color: #f1f7fa; }
+.map-core small { color: #d1e1ea; }
+.map-core b { color: #e3edf2; }
+.rf-objection h2,
+.rf-objection strong { color: #fff; }
+.rf-close > div > p { color: #e8f5fb; }
+.rf-footer {
+  color: #d2e1e9;
+  background: #002f52;
+}
+.rf-footer::before { color: #b9ced9; }
+
+/* Dedicated artifact page */
+.artifact-page .rf-header {
+  background: rgba(0,47,82,.97);
+  border-color: rgba(255,255,255,.18);
+}
+.artifact-page .rf-brand small,
+.artifact-page .rf-links a { color: #e2eef4; }
+.artifact-controls button {
+  color: #c3d8e4;
+  border-color: rgba(255,255,255,.26);
+}
+.artifact-controls button span { color: #a9c5d4; }
+.artifact-controls button[aria-selected=true],
+.artifact-controls button[aria-pressed=true] {
+  color: #fff;
+  background: rgba(255,255,255,.09);
+}
+.artifact-signal small,
+.artifact-verdict small { color: #bed4e0; }
+.artifact-signal strong { color: #fff; }
+.artifact-path { background: rgba(255,255,255,.34); }
+
+/* Responsive lockup and tension composition */
+@media (max-width: 1040px) {
+  .rf-brand {
+    grid-template-columns: 154px 1px minmax(150px, 200px);
+    min-width: 350px;
+  }
+  .rf-brand > img { width: 154px; height: 35px; }
+}
+@media (max-width: 780px) {
+  .rf-nav { min-height: 76px; }
+  .rf-brand {
+    grid-template-columns: 138px 1px minmax(112px, 160px);
+    min-width: 0;
+    column-gap: .7rem;
+  }
+  .rf-brand > img { width: 138px; height: 32px; }
+  .rf-brand::after { height: 26px; }
+  .rf-brand small {
+    font-size: .56rem;
+    letter-spacing: .055em;
+    max-width: 18ch;
+  }
+  .tension-axis { padding-top: 2.7rem; }
+  .tension-axis::before { left: 0; transform: none; }
+  .tension-axis article {
+    grid-template-columns: 36px 1fr;
+    gap: .45rem 1rem;
+    padding: 1.25rem 0;
+  }
+  .tension-axis article > strong:first-of-type { grid-column: 2; }
+  .tension-axis article > i {
+    display: block;
+    grid-column: 2;
+    width: 44px;
+    min-width: 44px;
+    height: 18px;
+    justify-self: start;
+  }
+  .tension-axis article > i::before {
+    position: absolute;
+    top: 50%;
+    width: 44px;
+  }
+  .tension-axis article > i::after {
+    left: 10px;
+    top: 1px;
+    font-size: .9rem;
+  }
+  .tension-axis article > strong:last-child {
+    grid-column: 2;
+    text-align: left;
+  }
+  .axis-line { left: 17px; }
+}
+@media (max-width: 520px) {
+  .rf-brand {
+    grid-template-columns: 126px minmax(95px, 1fr);
+    column-gap: .65rem;
+  }
+  .rf-brand::after { display: none; }
+  .rf-brand > img { width: 126px; height: 29px; }
+  .rf-brand small { grid-column: 2; font-size: .52rem; }
+  .sequencer-head { color: #d6e7ef; }
+  .gene-lane { opacity: .82; }
+}
+
+/* Reduced motion retains the high-contrast resolved state. */
+@media (prefers-reduced-motion: reduce) {
+  .gene-lane.is-active .gene-track::after {
+    animation: none !important;
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  .gene-lane.is-active {
+    background: linear-gradient(90deg, rgba(255,255,255,.16), rgba(255,255,255,.05));
+  }
+}
